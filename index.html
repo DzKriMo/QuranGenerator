@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+button {
+  background-color: #fbe8c2;
+  border-radius: 500px;
+  box-shadow: rgba(75, 55, 10, 0.2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(130, 110, 21, 0.15) 0 2px 4px,rgba(104, 84, 10, 0.15) 0 4px 8px,rgba(62, 45, 2, 0.15) 0 8px 16px,rgba(187, 137, 44, 0.15) 0 16px 32px;
+  color: rgb(170, 128, 36);
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'Rocher';
+  padding: 7px 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  font-size: 30px;
+  user-select: none;
+  
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+button:hover {
+  box-shadow: rgba(50, 29, 7, 0.35) 0 -25px 18px -14px inset,rgba(51, 29, 6, 0.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(77, 51, 9, 0.25) 0 4px 8px,rgba(80, 53, 12, 0.25) 0 8px 16px,rgba(93, 57, 13, 0.25) 0 16px 32px;
+  transform: scale(1.05) rotate(-1deg);
+}
+        
+        
+        
+        body {
+          background-image: url("re.png");
+          
+          background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+        }
+        @media (max-width: 480px) {
+  body {
+    background-size: contain;
+  }
+}
+        @font-face {
+  font-family: 'Rocher';
+  src: url(https://assets.codepen.io/9632/RocherColorGX.woff2);
+}
+
+body {
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  text-align: center;
+  font-size: 22px;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: rgb(102, 64, 7);
+  text-shadow: 2px 2px 8px #000000;
+}
+
+h1 {
+  margin: 0;
+}
+
+@font-palette-values --Grays {
+  font-family: Rocher;
+  base-palette: 9;
+}
+
+@font-palette-values --Purples {
+  font-family: Rocher;
+  base-palette: 6;
+}
+
+@font-palette-values --Mint {
+  font-family: Rocher;
+  base-palette: 7;
+}
+
+.grays {
+  font-palette: --Grays;
+}
+
+.purples {
+  font-palette: --Purples;
+}
+
+.mint {
+  font-palette: --Mint;
+}
+@import url(https://fonts.googleapis.com/css?family=Scheherazade:400,700&subset=arabic);
+
+.quran{
+  font-family: 'Scheherazade', 'Arabic Typesetting', serif;
+  font-size: 1.5em;
+  color: black;
+  text-shadow: 2px 2px 8px #361c03;
+  font-weight: bolder;
+}
+.quran .iqlab {
+  color: purple;
+}
+
+.quran .ghunna {
+  color: red;
+}
+
+.quran .idghambighunna {
+  color: green;
+}
+
+.quran .idghambilaghunna {
+  color: blue;
+}
+
+.quran .ikhfaa {
+  color: green;
+}
+
+.container {
+  position: relative;
+}
+.sub
+{
+  color: rgb(255, 255, 255);
+  text-shadow: 2px 2px 8px #000000;
+  font-weight: bolder;
+}
+        </style>
+	<title>Random Ayah Generator</title>
+	<script>
+		function getRandomAyah() {
+			var randReference = Math.floor(Math.random() * 6236) + 1;
+			var apiUrl = "http://api.alquran.cloud/v1/ayah/" + randReference;
+			fetch(apiUrl)
+			  .then(response => response.json())
+			  .then(data => {
+			    document.getElementById("surah-name").innerHTML = data.data.surah.englishName;
+			    document.getElementById("ayah-text").innerHTML = data.data.text;
+                document.getElementById("ayah-number").innerHTML = randReference;
+			  });
+		}
+	</script>
+</head>
+<br> <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<body>
+  
+	<div style="height: fit-content;">
+	<button onclick="getRandomAyah()" style="align-items: center;">Generate Random Ayah</button>
+
+	<div style="width: 370px;">
+		<p id="ayah-text" class="quran"></p>
+	</div>
+  <div>
+		<h3>Surah Name:</h3>
+		<p id="surah-name"  class="sub"></p>
+	</div>
+    <div style="height: auto;">
+        <h3>Ayah Number in the Quran:</h3>
+        <p id="ayah-number" class="sub"></p>
+    </div>
+  </div>
+</body>
+
+</html>
